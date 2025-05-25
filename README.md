@@ -41,3 +41,15 @@ npm install react-router-dom
 # pglite error: https://pglite.dev/docs/bundler-support
 npm run dev
 ```
+
+### Database Schema
+**Patient** - `Table`
+```
+- Name
+- Date of Birth
+- Gender
+- Address
+- Phone Number
+- Purpose
+- Remarks
+```
