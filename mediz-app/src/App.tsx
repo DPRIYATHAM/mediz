@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { initDB } from './lib/db';
-import { PatientForm } from './components/PatientForm';
-import SearchPage from './components/SearchPage';
+import { PatientForm } from './components/PatientForm.tsx';
+import SearchPage from './components/SearchPage.tsx';
 import './index.css';
 import Navbar from './components/Navbar.tsx';
 
