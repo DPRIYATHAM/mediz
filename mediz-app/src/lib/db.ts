@@ -22,7 +22,7 @@ export const getDB = () => {
 // Ensure the DB schema is created (only by the leader)
 export async function initDB() {
   const db = await getDB(); // wait for db to be initialized
-
+  console.log("Initializing DB...");
   if (db.isLeader) {
     await db.exec(`
       CREATE TABLE IF NOT EXISTS patients (

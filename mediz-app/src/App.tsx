@@ -41,9 +41,22 @@ function LandingPage() {
   );
 }
 
-function App() {
+// function App() {
+//   useEffect(() => {
+//     initDB();
+//   }, []);
+
+  function App() {
   useEffect(() => {
-    initDB();
+    const setupDB = async () => {
+      try {
+        await initDB();
+        console.log('Database initialized');
+      } catch (error) {
+        console.error('Failed to initialize database:', error);
+      }
+    };
+    setupDB();
   }, []);
 
   return (
