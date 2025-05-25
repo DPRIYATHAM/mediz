@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { initDB } from './lib/db';
+import { PatientForm } from './components/PatientForm';
+import SearchPage from './components/SearchPage';
+import './index.css';
+import Navbar from './components/Navbar.tsx';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function LandingPage() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+    <div style={{ width: '100vw' }} className="mx-auto items-center justify-center p-10">
+      <div className=" text-center ">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#2563eb] mb-6">
+          Welcome to Mediz
+        </h1>
+
+        <p className="text-lg sm:text-xl text-gray-700 mb-10">
+          Medical records management made eazzzyyy!
         </p>
+
+        <div className="flex flex-col sm:flex-row gap-20 justify-center">
+          <Link style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold', fontSize: '1.1rem' }}
+            to="/register"
+            className="bg-[#2563eb] text-white font-bold py-3 px-6 rounded-md"
+          >
+            Register Patient
+          </Link>
+          <Link style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold', fontSize: '1.1rem' }}
+            to="/search"
+            className="bg-[#2563eb] text-white font-bold py-3 px-6 rounded-md"
+          >
+            Search Patients
+          </Link>
+        </div>
+        <footer className="text-center mt-12 text-gray-400 text-sm">
+          &copy; {new Date().getFullYear()} Medblocks — Built with ❤️ and openEHR
+        </footer>
+
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+function App() {
+  useEffect(() => {
+    initDB();
+  }, []);
+
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/register" element={<PatientForm />} />
+        <Route path="/search" element={<SearchPage />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
